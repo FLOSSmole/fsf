@@ -1,0 +1,67 @@
+CREATE TABLE IF NOT EXISTS `fsf_projects_1` (
+  `datasource_id` int(11) NOT NULL,
+  `proj_unixname` varchar(100) NOT NULL,
+  `real_url` varchar(255) DEFAULT NULL,
+  `desc_short` varchar(100) DEFAULT NULL COMMENT 'deprecated 2012-May (no longer on web site)',
+  `is_gnu` tinyint(1) DEFAULT NULL,
+  `released_on` datetime DEFAULT NULL COMMENT 'added July 2012',
+  `date_collected` datetime NOT NULL,
+  PRIMARY KEY (`proj_unixname`,`datasource_id`),
+  KEY `proj_unixname` (`proj_unixname`),
+  KEY `datasource_id_index24` (`datasource_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `fsf_developer_projects_1` (
+  `datasource_id` int(11) NOT NULL,
+  `proj_unixname` varchar(100) NOT NULL,
+  `person_name` varchar(100) NOT NULL,
+  `role` varchar(30) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `web_page` varchar(255) DEFAULT NULL,
+  `date_collected` datetime NOT NULL,
+  PRIMARY KEY (`person_name`,`proj_unixname,`role`,`datasource_id`),
+  KEY `datasource_id_index20` (`datasource_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `fsf_project_categories_1` (
+  `proj_unixname` varchar(100) NOT NULL,
+  `datasource_id` int(11) NOT NULL,
+  `project_category_title` varchar(100) NOT NULL,
+  `project_category_url` varchar(255) NOT NULL,
+  `date_collected` datetime NOT NULL,
+  PRIMARY KEY (`proj_unixname`,`project_category_title`,`datasource_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `fsf_project_indexes_1` (
+  `proj_unixname` varchar(100) NOT NULL,
+  `datasource_id` int(11) NOT NULL,
+  `indexhtml` text NOT NULL,
+  `date_collected` datetime NOT NULL,
+  PRIMARY KEY (`proj_unixname`,`datasource_id`),
+  KEY `datasource_id_index21` (`datasource_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `fsf_project_licenses_1` (
+  `proj_unixname` varchar(100) NOT NULL,
+  `datasource_id` int(11) NOT NULL,
+  `license` varchar(50) NOT NULL,
+  `date_collected` datetime NOT NULL,
+  PRIMARY KEY (`proj_unixname`,`license`,`datasource_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `fsf_project_related_1` (
+  `proj_unixname` varchar(100) NOT NULL,
+  `datasource_id` int(11) NOT NULL,
+  `related_project_name` varchar(50) NOT NULL,
+  `date_collected` datetime NOT NULL,
+  PRIMARY KEY (`proj_unixname`,`related_project_name`,`datasource_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `fsf_project_requirements_1` (
+  `proj_unixname` varchar(100) NOT NULL,
+  `datasource_id` int(11) NOT NULL,
+  `requirement` varchar(50) NOT NULL,
+  `requirement_type` varchar(50) NOT NULL,
+  `date_collected` datetime NOT NULL,
+  PRIMARY KEY (`proj_unixname`,`requirement`,`datasource_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
