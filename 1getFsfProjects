@@ -1,0 +1,178 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jul  8 13:08:02 2016
+
+@author: eashwell2
+"""
+
+import sys
+import pymysql
+import os
+import codecs
+import re
+import datetime
+from bs4 import BeautifulSoup
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
+
+datasource_id = str(sys.argv[1])
+password = str(sys.argv[2])
+
+if datasource_id:
+    # ======
+    # LOCAL
+    # ======
+    try:
+        dbh2 = pymysql.connect(host='grid6.cs.elon.edu',
+                               database='test',
+                               user='eashwell',
+                               password=password,
+                               charset='utf8')
+    except pymysql.Error as err:
+        print(err)
+    cursor2 = dbh2.cursor()
+    """
+    # =======
+    # REMOTE
+    # =======
+    try:
+        dbh3 = pymysql.connect(host='flossdata.syr.edu',
+                               database='bitcoin',
+                               user='megan',
+                               password=password,
+                               charset='utf8')
+    except pymysql.Error as err:
+        print(err)
+    cursor3 = dbh3.cursor()
+    """
+    insertQuery = "INSERT INTO `fsf_projects_1`(`datasource_id`,\
+    `proj_unixname`, `real_url`, `desc_short`, `is_gnu`, `released_on`, \
+    `date_collected`) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+
+    os.mkdir(datasource_id)
+
+    url_stem = ('http://static.fsf.org/nosvn/directory/directory.xml')
+
+    try:
+        html1 = urllib2.urlopen(url_stem).read()
+    except urllib2.HTTPError as error:
+        print(error)
+    else:
+        fileloc = datasource_id + "/test.xml"
+        outfile = codecs.open(fileloc, 'w')
+        outfile.write(str(html1))
+        outfile.close()
+
+    soup = BeautifulSoup(open(fileloc), "lxml")
+
+    text = str(soup)
+    text = str(text)
+    text = text[5:]
+    text = text[:-6]
+    text = text.split("\\n")
+    skip = 49
+    swivt = 0
+    title = None
+    homePage = None
+    shortDescription = None
+    last_modified = None
+    gnu = None
+    for line in text:
+        findEnd = re.search("(\\\\t</swivt:subject>)", line)
+        if findEnd:
+            swivt = swivt + 1
+
+        findTitle = re.search('\\\\t\\\\t<rdfs:label>(.+)</rdfs:label>', line)
+        if findTitle:
+            title = findTitle.group(1)
+
+        findHomePage = re.search('\\\\t\\\\t<property:homepage_url' +
+                                 ' rdf:resource=' +
+                                 '"(.+)"></property:homepage_url>', line)
+        if findHomePage:
+            homePage = ""
+            homePage = findHomePage.group(1)
+
+        findShortDescription = re.search('\\\\t\\\\t<property:short_' +
+                                         'description rdf:datatype="' +
+                                         'http://www.w3.org/2001/XML' +
+                                         'Schema#string">(.+)</property:' +
+                                         'short_description>', line)
+        if findShortDescription:
+            shortDescription = findShortDescription.group(1)
+
+        findDateLastModified = re.search('\\\\t\\\\t<swivt:wikipagemod' +
+                                         'ificationdate rdf:datatype="http:' +
+                                         '//www.w3.org/2001/XMLSchema#date' +
+                                         'Time">(.+)</swivt:wikipagemodific' +
+                                         'ationdate>', line)
+        if findDateLastModified:
+            last_modified = findDateLastModified.group(1)
+            last_modified = datetime.datetime.strptime(last_modified,
+                                                       "%Y-%m-%dT%H:%M:%SZ")
+
+        findGnu = re.search('\\\\t\\\\t<property:is_gnu rdf:datatype' +
+                            '="http://www.w3.org/2001/XMLSchema#boolean"' +
+                            '>(.+)</property:is_gnu>', line)
+        if findGnu:
+            gnu = findGnu.group(1)
+            if gnu == "true":
+                gnu = 1
+
+        if swivt == 1:
+            swivt = 0
+            print(title)
+            print(homePage)
+            print(shortDescription)
+            print(last_modified)
+            print(gnu)
+            if skip <= 0:
+                # ======
+                # LOCAL
+                # ======
+                try:
+                    cursor2.execute(insertQuery, (datasource_id, title,
+                                                  homePage, shortDescription,
+                                                  gnu, last_modified,
+                                                  datetime.datetime.now()))
+                    dbh2.commit()
+                except pymysql.Error as error:
+                    print(error)
+                    dbh2.rollback()
+                """
+                # =======
+                # REMOTE
+                # =======
+                try:
+                    cursor3.execute(insertQuery, (datasource_id, header,
+                                                  sender,
+                                                  email, fullText,
+                                                  secondURL, fileloc,
+                                                  entryDate, currDate))
+                    dbh2.commit()
+                except pymysql.Error as error:
+                    print(error)
+                    dbh3.rollback()
+                """
+            skip = skip - 1
+
+            title = None
+            homePage = None
+            shortDescription = None
+            last_modified = None
+            gnu = None
+else:
+    print("You need both a datasource_id and a date to start on\
+    your commandline.")
+    exit
+
+cursor2.close()
+"""
+cursor3.close()
+"""
+dbh2.close()
+"""
+dbh3.close()
+"""
