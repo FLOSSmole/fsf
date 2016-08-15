@@ -93,7 +93,8 @@ if datasource_id:
                               '(.+)</a></li>', cat)
             if split:
                 category = split.group(2)
-                category_url = split.group(1)
+                category_url = 'https://directory.fsf.org/wiki/Category/' +\
+                    split.group(1)
                 # ======
                 # LOCAL
                 # ======
@@ -105,7 +106,6 @@ if datasource_id:
                 except pymysql.Error as error:
                     print(error)
                     dbh2.rollback()
-
                 # =======
                 # REMOTE
                 # =======
@@ -117,7 +117,6 @@ if datasource_id:
                 except pymysql.Error as error:
                     print(error)
                     dbh3.rollback()
-
         time.sleep(10)
 else:
     print("You need both a datasource_id and password.")
