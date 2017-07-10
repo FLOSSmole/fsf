@@ -166,12 +166,15 @@ try:
 
             desc_short = td[1].contents[0]
             print('short description: ', desc_short)
-
-            real_url = td[2].contents[0].contents[0]
-            print('real url: ', real_url)
-
+            
+            try:
+                real_url = td[2].contents[0].contents[0]
+                print('real url: ', real_url)
+            except:
+                real_url = None
+                print('real url: ', real_url)
+                
             licenseLine = td[3]
-
             regex = 'title=\"(.*?)\"'
             regexFinder = re.findall(regex, str(licenseLine))
             if regexFinder:
