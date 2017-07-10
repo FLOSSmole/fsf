@@ -52,7 +52,7 @@ def runProjects():
                        (datasource_id,
                         proj_num,
                         proj_unixname,
-                        url,
+                        url2,
                         real_url,
                         desc_short))
         db.commit()
@@ -162,15 +162,11 @@ try:
             regexUrl = '<a href="/wiki/(.*?)"'
             urlFinder = re.findall(regexUrl, str(td[0]))
             if urlFinder:
-                try:
-                    url2 = 'https://directory.fsf.org/wiki/' + urlFinder[0]
-                    req2 = urllib2.Request(url2, headers=hdr)
-                    indexhtml = urllib2.urlopen(req2, context = ssl._create_unverified_context()).read()
+                url2 = 'https://directory.fsf.org/wiki/' + urlFinder[0]
+                req2 = urllib2.Request(url2, headers=hdr)
+                indexhtml = urllib2.urlopen(req2, context = ssl._create_unverified_context()).read()
 
-                except:
-                    indexhtml = None
-
-                desc_short = td[1].contents[0]
+            desc_short = td[1].contents[0]
             print('short description: ', desc_short)
 
             real_url = td[2].contents[0].contents[0]
@@ -198,7 +194,7 @@ try:
 
             runIndexes()
             runProjects()
-            num = num + 500
+        num = num + 500
 
 except pymysql.Error as err:
     print(err)
