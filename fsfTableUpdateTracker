@@ -1,0 +1,10 @@
+--for fsf projects table
+ALTER TABLE `fsf_projects` CHANGE `proj_unixname` `proj_unixname` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `fsf_projects` CHANGE `url` `url` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `fsf_projects` CHANGE `real_url` `real_url` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `fsf_projects` CHANGE `proj_long_name` `proj_long_name` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `fsf_projects` CHANGE `proj_web_name` `proj_web_name` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `fsf_projects` CHANGE `license` `license` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'column deprecated as new licenses table is now used. Legacy data in this column.';
+ALTER TABLE `fsf_projects` CHANGE `desc_short` `desc_short` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'deprecated 2012-May (no longer on web site)';
+ALTER TABLE `fsf_projects` CHANGE `desc_long` `desc_long` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `fsf_projects` CHANGE `user_level` `user_level` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'deprecated 2012-May (no longer on web site)';
