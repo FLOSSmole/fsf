@@ -15,3 +15,7 @@ ALTER TABLE `fsf_project_indexes` CHANGE `indexhtml` `indexhtml` MEDIUMTEXT CHAR
 
 -- for fsf licenses table
 ALTER TABLE `fsf_project_licenses` CHANGE `license` `license` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+-- for fsf project categories table
+ALTER TABLE `fsf_project_categories` CHANGE `project_category_title` `project_category_title` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `fsf_project_categories` CHANGE `project_category_url` `project_category_url` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
