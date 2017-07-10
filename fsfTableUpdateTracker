@@ -11,3 +11,6 @@ ALTER TABLE `fsf_projects` CHANGE `user_level` `user_level` VARCHAR(50) CHARACTE
 
 -- for fsf indexes table
 ALTER TABLE `fsf_project_indexes` CHANGE `indexhtml` `indexhtml` MEDIUMTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+-- for fsf licenses table
+ALTER TABLE `fsf_project_licenses` CHANGE `license` `license` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
