@@ -25,7 +25,7 @@
 #
 ################################################################
 # usage:
-# python 1FSFWebScraper.py <datasource_id> <password>
+# python 01FSFWebScraper.py <datasource_id> <password>
 #
 # purpose:
 # get the project number, name, url, real url, and short description of each FSF project
@@ -134,6 +134,7 @@ try:
     html3 = urllib2.urlopen(req3, context=ssl._create_unverified_context()).read()
     soup2 = BeautifulSoup(html3, 'html.parser')
     num = 0
+    i = 1
     numResults = 'There are currently (.*?) approved packages'
     results = re.findall(numResults, str(soup2))[0]
 
@@ -148,11 +149,8 @@ try:
 
         tr = table.find_all('tr')
         for t in tr:
-            regexProjNum = 'data-row-number=\"(.*?)\"'
-            projNumFinder = re.findall(regexProjNum, str(t))
-            if projNumFinder:
-                proj_num = projNumFinder[0]
-                print('project number: ', proj_num)
+            proj_num = i
+            print('project number: ', proj_num)
 
             td = t.find_all('td')
 
@@ -194,6 +192,7 @@ try:
 
             runIndexes()
             runProjects()
+            i = i + 1
         num = num + 500
 
 except pymysql.Error as err:
