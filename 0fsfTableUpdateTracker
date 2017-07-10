@@ -1,6 +1,6 @@
 --for fsf projects table
 ALTER TABLE `fsf_projects` CHANGE `proj_unixname` `proj_unixname` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
-ALTER TABLE `fsf_projects` CHANGE `url` `url` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `fsf_projects` CHANGE `url` `url` VARCHAR(260) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 ALTER TABLE `fsf_projects` CHANGE `real_url` `real_url` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 ALTER TABLE `fsf_projects` CHANGE `proj_long_name` `proj_long_name` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 ALTER TABLE `fsf_projects` CHANGE `proj_web_name` `proj_web_name` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
