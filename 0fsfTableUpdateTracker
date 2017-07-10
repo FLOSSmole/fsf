@@ -8,6 +8,7 @@ ALTER TABLE `fsf_projects` CHANGE `license` `license` VARCHAR(100) CHARACTER SET
 ALTER TABLE `fsf_projects` CHANGE `desc_short` `desc_short` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'deprecated 2012-May (no longer on web site)';
 ALTER TABLE `fsf_projects` CHANGE `desc_long` `desc_long` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 ALTER TABLE `fsf_projects` CHANGE `user_level` `user_level` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'deprecated 2012-May (no longer on web site)';
+ALTER TABLE `fsf_projects` CHANGE `proj_web_name` `proj_web_name` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
 
 -- for fsf indexes table
 ALTER TABLE `fsf_project_indexes` CHANGE `indexhtml` `indexhtml` MEDIUMTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
