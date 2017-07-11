@@ -64,7 +64,7 @@ try:
 except pymysql.Error as err:
     print(err)
 
-selectQuery = 'SELECT proj_num, indexhtml FROM fsf_project_indexes LIMIT 350'
+selectQuery = 'SELECT proj_num, indexhtml FROM fsf_project_indexes'
 
 insertQuery = 'INSERT INTO fsf_project_requirements (proj_num, \
                                                      requirement, \
@@ -101,17 +101,7 @@ try:
                                 requirement = td[1].contents[0]
                                 print('requirement: ', requirement)
                             
-                        #tr = s.find_all('tr')
-                        #for t in tr:
-                        #    print('*', t,'*')
-                        #    td = t.find_all('td')
-                        #    requirement_type = td[0].contents[0]
-                        #    print('requirement_type: ', requirement_type)
-
-                        #    requirement = td[1].contents[0]
-                        #    print('requirement: ', requirement)
-
-                            #run()
+                                run()
 
 except pymysql.Error as err:
     print(err)
