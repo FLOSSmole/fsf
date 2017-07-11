@@ -19,3 +19,9 @@ ALTER TABLE `fsf_project_licenses` CHANGE `license` `license` VARCHAR(50) CHARAC
 -- for fsf project categories table
 ALTER TABLE `fsf_project_categories` CHANGE `project_category_title` `project_category_title` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 ALTER TABLE `fsf_project_categories` CHANGE `project_category_url` `project_category_url` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+-- for fsf developer projects
+ALTER TABLE `fsf_developer_projects` CHANGE `person_name` `person_name` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `fsf_developer_projects` CHANGE `role` `role` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `fsf_developer_projects` CHANGE `email` `email` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `fsf_developer_projects` CHANGE `web_page` `web_page` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
