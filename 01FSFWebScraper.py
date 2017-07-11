@@ -134,7 +134,7 @@ try:
     html3 = urllib2.urlopen(req3, context=ssl._create_unverified_context()).read()
     soup2 = BeautifulSoup(html3, 'html.parser')
     num = 0
-    i = 1
+    i = 0
     numResults = 'There are currently (.*?) approved packages'
     results = re.findall(numResults, str(soup2))[0]
 
