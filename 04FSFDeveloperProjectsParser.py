@@ -41,14 +41,12 @@ datasource_id = '122'  # sys.argv[1]
 
 def run():
     try:
-        print('HERE')
         cursor.execute(insertQuery,
                        (proj_num,
                         person_name,
                         role,
                         email,
                         datasource_id))
-        print('THERE')
         db.commit()
         print(proj_num, " inserted into developer projects table!\n")
     except pymysql.Error as err:
