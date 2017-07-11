@@ -28,3 +28,7 @@ ALTER TABLE `fsf_developer_projects` CHANGE `web_page` `web_page` VARCHAR(255) C
 
 -- for fsf project related
 ALTER TABLE `fsf_project_related` CHANGE `related_project_name` `related_project_name` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+-- for fsf project requirements
+ALTER TABLE `fsf_project_requirements` CHANGE `requirement` `requirement` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `fsf_project_requirements` CHANGE `requirement_type` `requirement_type` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
