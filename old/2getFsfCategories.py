@@ -24,9 +24,9 @@ if datasource_id:
     # Collector
     # ======
     try:
-        dbh1 = pymysql.connect(host='grid6.cs.elon.edu',
-                               database='test',
-                               user='eashwell',
+        dbh1 = pymysql.connect(host='',
+                               database='',
+                               user='',
                                password=password,
                                charset='utf8')
     except pymysql.Error as err:
