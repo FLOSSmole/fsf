@@ -19,9 +19,9 @@ if datasource_id:
     # LOCAL
     # ======
     try:
-        dbh2 = pymysql.connect(host='grid6.cs.elon.edu',
-                               database='test',
-                               user='eashwell',
+        dbh2 = pymysql.connect(host='',
+                               database='',
+                               user='',
                                password=password,
                                charset='utf8')
     except pymysql.Error as err:
@@ -32,9 +32,9 @@ if datasource_id:
     # REMOTE
     # =======
     try:
-        dbh3 = pymysql.connect(host='flossdata.syr.edu',
-                               database='bitcoin',
-                               user='megan',
+        dbh3 = pymysql.connect(host='',
+                               database='',
+                               user='',
                                password=password,
                                charset='utf8')
     except pymysql.Error as err:
